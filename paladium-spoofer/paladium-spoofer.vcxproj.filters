@@ -36,6 +36,9 @@
     <ClCompile Include="wmic_spoof.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="winmm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -68,5 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="winmm_jump.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

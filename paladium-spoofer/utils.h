@@ -8,6 +8,8 @@
 
 
 namespace utils {
+
+	void create_console();
 	std::wstring GetRegistryKeyPath(HKEY hKey);
 	bool ends_with(std::wstring mainStr, std::wstring toMatch);
 	std::wstring to_lower_w(const std::wstring& str);

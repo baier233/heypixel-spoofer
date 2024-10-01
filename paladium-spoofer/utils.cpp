@@ -36,7 +36,6 @@ EXTERN_C NTSYSAPI NTSTATUS NTAPI NtQueryKey(
 namespace utils {
 
 
-
 	std::wstring to_lower_w(const std::wstring& str) {
 		std::wstring lowerStr;
 		for (wchar_t ch : str) {
@@ -120,5 +119,30 @@ namespace utils {
 		in.close();
 
 		return wss.str();
+	}
+
+#include <io.h>
+#include <fcntl.h>
+#include <iostream>
+	void create_console()
+	{
+		FreeConsole();
+		if (!AllocConsole())
+		{
+			char buffer[1024] = { 0 };
+			sprintf_s(buffer, "Failed to AllocConsole( ), GetLastError( ) = %d", GetLastError());
+			MessageBoxA(HWND_DESKTOP, buffer, "Error", MB_OK);
+
+			return;
+		}
+
+		auto lStdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+		auto hConHandle = _open_osfhandle(PtrToUlong(lStdHandle), _O_TEXT);
+		auto fp = _fdopen(hConHandle, "w");
+		//CONOUT$
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+
+		*(__acrt_iob_func(1)) = *fp;
+		setvbuf(stdout, NULL, _IONBF, 0);
 	}
 }

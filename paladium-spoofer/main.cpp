@@ -56,46 +56,32 @@ static BOOL WINAPI hk_GetVolumeNameForVolumeMountPointW(LPCWSTR lpszVolumeMountP
 	memcpy(lpszVolumeName, &value.c_str()[0], cchBufferLength);
 	return success;
 }
-static DWORD BootStrapThread(HANDLE _) {
+DWORD BootStrapThread(HANDLE _) {
+
+	if (std::wstring(GetCommandLine()).find(L"-DToken") == std::wstring::npos)
+	{
+		return TRUE;
+	}
+
 
 	if (DetourIsHelperProcess()) {
 		return TRUE;
 	}
+	utils::create_console();
 
-	HMODULE lwjgl_module = GetModuleHandleA("lwjgl64.dll");
-
-	value = utils::read_file_to_wstr(L"C:\\Users\\Public\\nt.dat");
-	//value = heypixel_shit::get_username();
+	//value = utils::read_file_to_wstr(L"C:\\Users\\Public\\nt.dat");
+	value = heypixel_shit::get_username();
 	heypixel_shit::global_factor = utils::hash_string(value.c_str());
-	DetourRestoreAfterWith();
+
+
+
 	DetourTransactionBegin();
 	DetourUpdateThread(GetCurrentThread());
-
-	if (lwjgl_module) {
-		orig_nglGetTexImage = (void (*)(GLenum, GLint, GLenum, GLenum, GLvoid*)) GetProcAddress(lwjgl_module,
-			"Java_org_lwjgl_opengl_GL11_nglGetTexImage");
-
-		DetourAttach(&(PVOID&)orig_nglGetTexImage, (PVOID)hk_nglGetTexImage);
-	}
-	else {
-		system("msg %username% \"lwjgl64 not found.\"");
-	}
-
 	DetourAttach(&(PVOID&)orig_RegQueryValueExW, hk_RegQueryValueExW);
 	DetourAttach(&(PVOID&)orig_GetVolumeNameForVolumeMountPointW, hk_GetVolumeNameForVolumeMountPointW);
 	wmi_hook::initialize(value);
-	module_hooks::initialize_hooks();
+	//module_hooks::initialize_hooks();
 	wmic_spoof::initialize();
 	mac_spoof::initialize();
 	DetourTransactionCommit();
-}
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
-{
-	if (ul_reason_for_call != DLL_PROCESS_ATTACH)
-	{
-		return TRUE;
-	}
-	CreateThread(0, 0, BootStrapThread, 0, 0, 0);
-
-	return TRUE;
 }
