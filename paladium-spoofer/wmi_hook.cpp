@@ -40,10 +40,10 @@ namespace wmi_hook
 
 		if (hResult >= WBEM_S_NO_ERROR && should_hash_spoof(wszName))
 		{
-			std::wcout << "wszName :" << std::wstring(wszName) << " " << std::wstring(pVal->bstrVal) << std::endl;
+			//std::wcout << "wszName :" << std::wstring(wszName) << " " << std::wstring(pVal->bstrVal) << std::endl;
 
-			/*SysFreeString(pVal->bstrVal);
-			pVal->bstrVal = SysAllocString(unique_hash_value.c_str());*/
+			SysFreeString(pVal->bstrVal);
+			pVal->bstrVal = SysAllocString(unique_hash_value.c_str());
 		}
 
 		return hResult;

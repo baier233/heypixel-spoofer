@@ -178,7 +178,6 @@
     <ClInclude Include="mac_spoof.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="module_hooks.hpp" />
-    <ClInclude Include="strutils.h" />
     <ClInclude Include="titan_hook.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="wmic_spoof.h" />

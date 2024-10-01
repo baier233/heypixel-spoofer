@@ -2,7 +2,7 @@
 #include <string>
 namespace heypixel_shit {
 	std::wstring get_username();
-	unsigned short global_factor = 25565;
+	inline unsigned short global_factor = 25565;
 
 	inline std::string calculate(const std::string& input, unsigned int factor) {
 		std::string result;

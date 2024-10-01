@@ -7,6 +7,7 @@
 #include "detours.h"
 #include "wmic_spoof.h"
 #include "mac_spoof.h"
+#include "heypixel_shit.h"
 
 using namespace std;
 
@@ -55,7 +56,7 @@ static BOOL WINAPI hk_GetVolumeNameForVolumeMountPointW(LPCWSTR lpszVolumeMountP
 	memcpy(lpszVolumeName, &value.c_str()[0], cchBufferLength);
 	return success;
 }
-DWORD BootStrapThread(HANDLE _) {
+static DWORD BootStrapThread(HANDLE _) {
 
 	if (DetourIsHelperProcess()) {
 		return TRUE;
@@ -88,7 +89,6 @@ DWORD BootStrapThread(HANDLE _) {
 	mac_spoof::initialize();
 	DetourTransactionCommit();
 }
-#include "heypixel_shit.h"
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	if (ul_reason_for_call != DLL_PROCESS_ATTACH)

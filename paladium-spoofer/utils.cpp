@@ -37,7 +37,7 @@ namespace utils {
 
 
 
-	inline std::wstring to_lower_w(const std::wstring& str) {
+	std::wstring to_lower_w(const std::wstring& str) {
 		std::wstring lowerStr;
 		for (wchar_t ch : str) {
 			lowerStr += std::tolower(ch);

@@ -65,9 +65,6 @@
     <ClInclude Include="wmic_spoof.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="strutils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
