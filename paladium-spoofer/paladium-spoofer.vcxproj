@@ -77,12 +77,15 @@
     <ExternalIncludePath>C:\Program Files\Java\jdk1.8.0_202\include\win32;C:\Program Files\Java\jdk1.8.0_202\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExternalIncludePath>C:\Program Files\Java\jdk1.8.0_202\include\win32;C:\Program Files\Java\jdk1.8.0_202\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <IncludePath>$(ProjectDir)third_party\detour\include;$(ProjectDir)third_party\java\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(ProjectDir)third_party\detour;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>C:\Program Files\Java\jdk1.8.0_202\include\win32;C:\Program Files\Java\jdk1.8.0_202\include;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <LibraryPath>$(ProjectDir)third_party\detour;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <TargetName>vlc</TargetName>
+    <IncludePath>$(ProjectDir)third_party\detour\include;$(ProjectDir)third_party\java\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -128,7 +131,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,7 +151,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,16 +164,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="heypixel_shit.cpp" />
+    <ClCompile Include="mac_spoof.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="module_hooks.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="wmic_spoof.cpp" />
     <ClCompile Include="wmi_hook.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="heypixel_shit.h" />
     <ClInclude Include="includes.h" />
+    <ClInclude Include="mac_spoof.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="module_hooks.hpp" />
+    <ClInclude Include="strutils.h" />
+    <ClInclude Include="titan_hook.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="wmic_spoof.h" />
     <ClInclude Include="wmi_hook.hpp" />
   </ItemGroup>
   <ItemGroup>

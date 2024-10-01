@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 #include <windows.h> // win api
-#include "detours.h" // hooking
+#include <detours.h> // hooking
 #include <iostream> // yes
 
 //java shit

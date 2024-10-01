@@ -1,4 +1,4 @@
-
+﻿
 #include <WbemIdl.h>
 #include <iomanip>
 #include <vector>
@@ -15,14 +15,14 @@ namespace wmi_hook
 		VARIANT* pVal,
 		CIMTYPE* pType,
 		long* plFlavor
-	);
+		);
 
 	static tGetFunc original_get_func = NULL;
 
 	static std::wstring unique_hash_value;
 	static std::vector<LPCWSTR> ids;
 
-	bool should_hash_spoof(LPCWSTR str) 
+	static bool should_hash_spoof(LPCWSTR str)
 	{
 		for (LPCWSTR s : ids)
 		{
@@ -35,13 +35,15 @@ namespace wmi_hook
 		return false;
 	}
 
-	HRESULT __stdcall hk_get_func(IWbemClassObject* pThis, LPCWSTR wszName, LONG lFlags, VARIANT* pVal, CIMTYPE* pType, long* plFlavor) {
+	static HRESULT __stdcall hk_get_func(IWbemClassObject* pThis, LPCWSTR wszName, LONG lFlags, VARIANT* pVal, CIMTYPE* pType, long* plFlavor) {
 		HRESULT hResult = original_get_func(pThis, wszName, lFlags, pVal, pType, plFlavor);
 
 		if (hResult >= WBEM_S_NO_ERROR && should_hash_spoof(wszName))
 		{
-			SysFreeString(pVal->bstrVal);
-			pVal->bstrVal = SysAllocString(unique_hash_value.c_str());
+			std::wcout << "wszName :" << std::wstring(wszName) << " " << std::wstring(pVal->bstrVal) << std::endl;
+
+			/*SysFreeString(pVal->bstrVal);
+			pVal->bstrVal = SysAllocString(unique_hash_value.c_str());*/
 		}
 
 		return hResult;

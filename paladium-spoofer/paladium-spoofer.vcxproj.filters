@@ -27,6 +27,15 @@
     <ClCompile Include="module_hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="heypixel_shit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mac_spoof.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wmic_spoof.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -42,6 +51,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="module_hooks.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="heypixel_shit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="titan_hook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mac_spoof.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wmic_spoof.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strutils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
